@@ -9,7 +9,7 @@
 We use part of DeepFashion to implement our editing system. All the codes are written in Pytorch
 
 DeepFashion can be used to **train and evaluate algorithms of fashion retrieval, fashion synthesis, and GANs for fashion generation and editing**.
-
+$a_{10}$
 
 * Demo of interactive fashion image editing
 
