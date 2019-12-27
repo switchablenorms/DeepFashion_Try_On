@@ -2,7 +2,7 @@
 
 [[Dataset Partition Label]](https://drive.google.com/open?id=1Jt9DykVUmUo5dzzwyi4C_1wmWgVYsFDl)  
 
-[[Sample Try-on Video]](https://www.youtube.com/watch?v=h-QWM92VLA0)  
+[[Sample Try-on Video]](https://www.youtube.com/watch?v=BbKBSfDBcxI)  
 
 
 
