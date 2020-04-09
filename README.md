@@ -23,8 +23,8 @@ We use the pose map to calculate the difficulty level of try-on. The key motivat
 ![image](https://github.com/switchablenorms/DeepFashion_Try_On/blob/master/images/formula.png)
 
 where t is a certain key point, Mp' is the set of key point we take into consideration, and N is the size of the set. 
-```bash
 ## Segmentation Label
+```bash
 0 -> Background
 1 -> Hair
 4 -> Upclothes
