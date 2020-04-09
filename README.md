@@ -9,7 +9,10 @@ We rearrange the VITON dataset for easy access.
 
 [[Paper]](https://arxiv.org/abs/2003.05863)
 
-
+## Inference
+```bash
+python test.py
+```
 **Dataset Partition** We present a criterion to introduce the difficulty of try-on for a certain reference image.
 ## The specific key points we choose to evaluate the try-on difficulty
 ![image](https://github.com/switchablenorms/DeepFashion_Try_On/blob/master/images/criterion.png)
@@ -20,6 +23,19 @@ We use the pose map to calculate the difficulty level of try-on. The key motivat
 ![image](https://github.com/switchablenorms/DeepFashion_Try_On/blob/master/images/formula.png)
 
 where t is a certain key point, Mp' is the set of key point we take into consideration, and N is the size of the set. 
+
+## Segmentation Label
+0 -> Background
+1 -> Hair
+4 -> Upclothes
+5 -> Left-shoe 
+6 -> Right-shoe
+8 -> Pants
+9 -> Left_leg
+10 -> Right_leg
+11 -> Left_arm
+12 -> Face
+13 -> Right_arm
 
 ## Sample images from different difficulty level
 
