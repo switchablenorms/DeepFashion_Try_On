@@ -52,11 +52,12 @@ The use of this software is RESTRICTED to **non-commercial research and educatio
 ## Citation
 If you use our code or models in your research, please cite with:
 ```
-@inproceedings{HanYang2020,
-  title={Towards Photo-Realistic Virtual Try-On by Adaptively Generating↔Preserving Image Content},
-  author={Han Yang, Ruimao Zhang, Xiaobao Guo, Wei Liu, Wangmeng Zuo and Ping Luo},
-  booktitle={CVPR},
-  year={2020}
+@InProceedings{Yang_2020_CVPR,
+author = {Yang, Han and Zhang, Ruimao and Guo, Xiaobao and Liu, Wei and Zuo, Wangmeng and Luo, Ping},
+title = {Towards Photo-Realistic Virtual Try-On by Adaptively Generating-Preserving Image Content},
+booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = {2020}
 }
 ```
 
