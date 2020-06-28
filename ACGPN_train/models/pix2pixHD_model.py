@@ -366,10 +366,11 @@ class Pix2PixHDModel(BaseModel):
         loss_G_VGG = 0
         loss_G_VGG +=self.criterionVGG.warp(warped,real_image*clothes_mask)+ self.criterionVGG.warp(comp_fake_c, real_image*clothes_mask) * 10
         loss_G_VGG += self.criterionVGG.warp(fake_c, real_image*clothes_mask) *20
+        loss_G_VGG += self.criterionVGG(fake_image, real_image) *10
 
-        # L1_loss=self.criterionFeat(fake_image , real_image )
+        L1_loss=self.criterionFeat(fake_image , real_image )
         #
-        L1_loss=self.criterionFeat(warped_mask,clothes_mask)+self.criterionFeat(warped,real_image*clothes_mask)
+        L1_loss+=self.criterionFeat(warped_mask,clothes_mask)+self.criterionFeat(warped,real_image*clothes_mask)
         L1_loss+=self.criterionFeat(fake_c,real_image*clothes_mask)*0.2
         L1_loss+=self.criterionFeat(comp_fake_c,real_image*clothes_mask)*10
         L1_loss+=self.criterionFeat(composition_mask,clothes_mask)
