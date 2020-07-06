@@ -30,6 +30,7 @@ where t is a certain key point, Mp' is the set of key point we take into conside
 4 -> Upclothes
 5 -> Left-shoe 
 6 -> Right-shoe
+7 -> Noise
 8 -> Pants
 9 -> Left_leg
 10 -> Right_leg
