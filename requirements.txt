@@ -1,0 +1,8 @@
+future==0.18.2
+numpy==1.19.1
+opencv-python==4.4.0.42
+Pillow==7.2.0
+protobuf==3.13.0
+six==1.15.0
+tensorboardX==2.1
+torch==1.6.0
