@@ -13,6 +13,9 @@ We rearrange the VITON dataset for easy access.
 ```bash
 python test.py
 ```
+[colab-badge]: <https://colab.research.google.com/assets/colab-badge.svg>
+
+### Inference using colab [![Open In Colab][colab-badge]](https://colab.research.google.com/drive/1HvSB2Mx8WZ-Wo_8FDrc05DaOi4QUE9hG)
 **Dataset Partition** We present a criterion to introduce the difficulty of try-on for a certain reference image.
 ## The specific key points we choose to evaluate the try-on difficulty
 ![image](https://github.com/switchablenorms/DeepFashion_Try_On/blob/master/images/criterion.png)
