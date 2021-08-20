@@ -18,7 +18,7 @@ python test.py
 ## Evaluation IS and SSIM
 The results for computing IS and SSIM are **same-clothes reconstructed results**. 
 
-The code *default* generates *random* clothes-model pairs, so you need to modify **ACGPN_inference/data/aligned_dataset.py** to generate the reconstructed results.
+The code *defaultly* generates *random* clothes-model pairs, so you need to modify **ACGPN_inference/data/aligned_dataset.py** to generate the reconstructed results.
 
 Here, we also offer the reconstructed results on test set of VITON dataset by inferencing this github repo, 
 [[Precomputed Evaluation Results]](https://drive.google.com/file/d/1obk8NFMlSFmCJJuzJDooSWesI46ZXXmY/view?usp=sharing)
