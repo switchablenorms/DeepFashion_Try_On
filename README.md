@@ -16,9 +16,9 @@ python test.py
 **Dataset Partition** We present a criterion to introduce the difficulty of try-on for a certain reference image.
 
 ## Evaluation IS and SSIM
-The results for computing IS and SSIM are same-clothes reconstructed results. 
+The results for computing IS and SSIM are **same-clothes reconstructed results**. 
 
-The code default generates random clothes-model pairs, so you need to modify ACGPN_inference/data/aligned_dataset.py to generate the reconstructed results.
+The code *default* generates *random* clothes-model pairs, so you need to modify **ACGPN_inference/data/aligned_dataset.py** to generate the reconstructed results.
 
 Here, we also offer the reconstructed results on test set of VITON dataset. 
 [[Precomputed Evaluation Results]](https://drive.google.com/file/d/1obk8NFMlSFmCJJuzJDooSWesI46ZXXmY/view?usp=sharing)
