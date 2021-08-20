@@ -20,9 +20,9 @@ The results for computing IS and SSIM are **same-clothes reconstructed results**
 
 The code *default* generates *random* clothes-model pairs, so you need to modify **ACGPN_inference/data/aligned_dataset.py** to generate the reconstructed results.
 
-Here, we also offer the reconstructed results on test set of VITON dataset. 
+Here, we also offer the reconstructed results on test set of VITON dataset by inferencing this github repo, 
 [[Precomputed Evaluation Results]](https://drive.google.com/file/d/1obk8NFMlSFmCJJuzJDooSWesI46ZXXmY/view?usp=sharing)
-The results here can be directly used to compute the IS and SSIM evalutations.
+The results here can be directly used to compute the IS and SSIM evalutations. You can get identical results using this github repo.
 ### IS score
 1. Use the pytorch inception score repo. https://github.com/sbarratt/inception-score-pytorch
 2. Normalize the images to [-1,1] and reshape correctly. Please strictly follow the procedure given in this repo.
