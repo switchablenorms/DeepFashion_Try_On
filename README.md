@@ -18,12 +18,12 @@ python test.py
 ## Evaluation IS and SSIM
 The results for computing IS and SSIM are same-clothes reconstructed results. The code default generates random clothes-model pairs, so you need to modify ACGPN_inference/data/aligned_dataset.py to generate the reconstructed results.
 Here, we also offer the reconstructed results on test set of VITON dataset. ![link](https://drive.google.com/file/d/1obk8NFMlSFmCJJuzJDooSWesI46ZXXmY/view?usp=sharing)
-# IS score
+### IS score
 1. Use the pytorch inception score repo. https://github.com/sbarratt/inception-score-pytorch
 2. Normalize the images to [-1,1] and reshape correctly. Please strictly follow the procedure given in this repo.
 3. Compute the score. The splits number also change the results.
 
-#SSIM score
+###SSIM score
 1. Use the pytorch SSIM repo. https://github.com/Po-Hsun-Su/pytorch-ssim
 2. Normalize the image to [0,1] and reshape correctly. If not normalized correctly, the results differ a lot. 
 3. Compute the score. The SSIM score should be 0.8664, which is a higher score than reported in paper since it is a better checkpoint.
