@@ -39,8 +39,8 @@ The results here can be directly used to compute the IS and SSIM evalutations. Y
 ## The specific key points we choose to evaluate the try-on difficulty
 ![image](https://github.com/switchablenorms/DeepFashion_Try_On/blob/master/images/criterion.png)
 
-We use the pose map to calculate the difficulty level of try-on. The key motivation behind this is the more complex the occlusions and layouts are in the clothing area, the harder it will be. And the formula is given,
-## The formula to compute the difficulty of try-onreference image
+We use the pose map to calculate the difficulty level of try-on. The key motivation behind this is the more complex the occlusions and layouts are in the clothing area, the harder it will be. And the formula is given below. Also, manual selection is involved to improve the difficulty partition.
+## The formula to compute the difficulty of try-on reference image
 
 ![image](https://github.com/switchablenorms/DeepFashion_Try_On/blob/master/images/formula.png)
 
