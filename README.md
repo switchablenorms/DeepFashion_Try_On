@@ -14,6 +14,7 @@ We rearrange the VITON dataset for easy access.
 python test.py
 ```
 [colab-badge]: <https://colab.research.google.com/assets/colab-badge.svg>
+**Note that** the results of our pretrained model are only guaranteed in VITON dataset only, you should re-train the pipeline to get good results in other datasets.
 
 ### Inference using colab [![Open In Colab][colab-badge]](https://colab.research.google.com/drive/1HvSB2Mx8WZ-Wo_8FDrc05DaOi4QUE9hG)
 **Dataset Partition** We present a criterion to introduce the difficulty of try-on for a certain reference image.
