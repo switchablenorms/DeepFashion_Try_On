@@ -27,23 +27,26 @@ Here, we also offer the reconstructed results on test set of VITON dataset by in
 [[Precomputed Evaluation Results]](https://drive.google.com/file/d/1obk8NFMlSFmCJJuzJDooSWesI46ZXXmY/view?usp=sharing)
 The results here can be directly used to compute the IS and SSIM evalutations. You can get identical results using this github repo.
 
+
 ### SSIM score
-1. Use the pytorch SSIM repo. https://github.com/Po-Hsun-Su/pytorch-ssim
-2. Normalize the image to [0,1] and reshape correctly. If not normalized correctly, the results differ a lot. 
-3. Compute the score. The SSIM score should be 0.8664, which is a higher score than reported in paper since it is a better checkpoint.
+- 1. Use the pytorch SSIM repo. https://github.com/Po-Hsun-Su/pytorch-ssim
+- 2. Normalize the image to [0,1] and reshape correctly. If not normalized correctly, the results differ a lot. 
+- 3. Compute the score. The SSIM score should be 0.8664, which is a higher score than reported in paper since it is a better checkpoint.
 
 
 ### IS score
-1. Use the pytorch inception score repo. https://github.com/sbarratt/inception-score-pytorch
-2. Normalize the images to [-1,1] and reshape correctly. Please strictly follow the procedure given in this repo.
-3. Compute the score. The splits number also changes the results. We use splits number =1 to compute the results.
-4. **Note that** the released checkpoints produce IS score 2.82, which is **slightly** lower (but still **SOTA**) than the paper since it is a different checkpoint with better SSIM performance. Same results of the paper can be reproduced by re-training with different training epochs.
+- 1. Use the pytorch inception score repo. https://github.com/sbarratt/inception-score-pytorch
+- 2. Normalize the images to [-1,1] and reshape correctly. Please strictly follow the procedure given in this repo.
+- 3. Compute the score. The splits number also changes the results. We use splits number =1 to compute the results.
+- 4. **Note that** the released checkpoints produce IS score 2.82, which is **slightly** lower (but still **SOTA**) than the paper since it is a different checkpoint with better SSIM performance. Same results of the paper can be reproduced by re-training with different training epochs.
 
 
 ## The specific key points we choose to evaluate the try-on difficulty
 ![image](https://github.com/switchablenorms/DeepFashion_Try_On/blob/master/images/criterion.png)
 
-We use the pose map to calculate the difficulty level of try-on. The key motivation behind this is the more complex the occlusions and layouts are in the clothing area, the harder it will be. And the formula is given below. Also, manual selection is involved to improve the difficulty partition.
+- We use the pose map to calculate the difficulty level of try-on. The key motivation behind this is the more complex the occlusions and layouts are in the clothing area, the harder it will be. And the formula is given below. Also, manual selection is involved to improve the difficulty partition.
+- Variations of the pose map predictions largely affect the absolute value of try-on complexity, so you may have different partition size using our reported separation values. 
+- Relative ranking of complexity best depicts the complexity distribution. Try top 100 or bottom 100 and you can see the effectiveness of our criterion.
 ## The formula to compute the difficulty of try-on reference image
 
 ![image](https://github.com/switchablenorms/DeepFashion_Try_On/blob/master/images/formula.png)
