@@ -15,11 +15,11 @@ We rearrange the VITON dataset for easy access.
 ```bash
 python test.py
 ```
-[colab-badge]: <https://colab.research.google.com/assets/colab-badge.svg> Thanks Levin for contributing the colab script.
+[colab-badge]: <https://colab.research.google.com/assets/colab-badge.svg>
 **Note that** the results of our pretrained model are only guaranteed in VITON dataset only, you should re-train the pipeline to get good results in other datasets.
 
 ### Inference using colab [![Open In Colab][colab-badge]](https://colab.research.google.com/drive/1HvSB2Mx8WZ-Wo_8FDrc05DaOi4QUE9hG)
-
+Thanks Levin for contributing the colab inference script.
 ## Evaluation IS and SSIM
 The results for computing IS and SSIM are **same-clothes reconstructed results**. 
 
