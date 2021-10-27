@@ -36,7 +36,7 @@ The results here can be directly used to compute the IS and SSIM evalutations. Y
 ### SSIM score
   1. Use the pytorch SSIM repo. https://github.com/Po-Hsun-Su/pytorch-ssim
   2. Normalize the image to [0,1] and reshape correctly. If not normalized correctly, the results differ a lot. 
-  3. Compute the score. The SSIM score should be 0.8664, which is a higher score than reported in paper since it is a better checkpoint.
+  3. Compute the score with window size = 11. The SSIM score should be 0.8664, which is a higher score than reported in paper since it is a better checkpoint.
 
 
 ### IS score
