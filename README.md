@@ -21,6 +21,8 @@ python test.py
 ### Inference using colab [![Open In Colab][colab-badge]](https://colab.research.google.com/drive/1HvSB2Mx8WZ-Wo_8FDrc05DaOi4QUE9hG)
 Thanks Levin for contributing the colab inference script.
 ## Evaluation IS and SSIM
+**Note that** The released checkpoints are different from what we used in the paper which generate better visual results but may have different (lower or higher) quantitative statistics. Same results of the paper can be reproduced by re-training with different training epochs.
+
 The results for computing IS and SSIM are **same-clothes reconstructed results**. 
 
 The code *defaultly* generates *random* clothes-model pairs, so you need to modify **ACGPN_inference/data/aligned_dataset.py** to generate the reconstructed results.
@@ -28,6 +30,7 @@ The code *defaultly* generates *random* clothes-model pairs, so you need to modi
 Here, we also offer the reconstructed results on test set of VITON dataset by inferencing this github repo, 
 [[Precomputed Evaluation Results]](https://drive.google.com/file/d/1obk8NFMlSFmCJJuzJDooSWesI46ZXXmY/view?usp=sharing)
 The results here can be directly used to compute the IS and SSIM evalutations. You can get identical results using this github repo.
+
 
 
 ### SSIM score
@@ -40,7 +43,7 @@ The results here can be directly used to compute the IS and SSIM evalutations. Y
   1. Use the pytorch inception score repo. https://github.com/sbarratt/inception-score-pytorch
   2. Normalize the images to [-1,1] and reshape correctly. Please strictly follow the procedure given in this repo.
   3. Compute the score. The splits number also changes the results. We use splits number =1 to compute the results.
-  4. **Note that** the released checkpoints produce IS score 2.82, which is **slightly** lower (but still **SOTA**) than the paper since it is a different checkpoint with better SSIM performance. Same results of the paper can be reproduced by re-training with different training epochs.
+  4. **Note that** the released checkpoints produce IS score 2.82, which is **slightly** lower (but still **SOTA**) than the paper since it is a different checkpoint with better SSIM performance. 
 
 
 ## The specific key points we choose to evaluate the try-on difficulty
