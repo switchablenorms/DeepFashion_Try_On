@@ -41,7 +41,7 @@ The results here can be directly used to compute the IS and SSIM evalutations. Y
 
 ### IS score
   1. Use the pytorch inception score repo. https://github.com/sbarratt/inception-score-pytorch
-  2. Normalize the images to [-1,1] and reshape correctly. Please strictly follow the procedure given in this repo.
+  2. Normalize the images ((img/255.0)*2-1) and reshape correctly. Please strictly follow the procedure given in this repo.
   3. Compute the score. The splits number also changes the results. We use splits number =1 to compute the results.
   4. **Note that** the released checkpoints produce IS score 2.82, which is **slightly** lower (but still **SOTA**) than the paper since it is a different checkpoint with better SSIM performance. 
 
