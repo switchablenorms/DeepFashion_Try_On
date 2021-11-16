@@ -80,7 +80,7 @@ where t is a certain key point, Mp' is the set of key point we take into conside
   
 ![image](https://github.com/switchablenorms/DeepFashion_Try_On/blob/master/images/tryon.png)
 
-## Limitaions and Failure Cases
+## Limitations and Failure Cases
 ![image](https://github.com/switchablenorms/DeepFashion_Try_On/blob/master/images/failure.png)
 	1. Large transformation of the semantic layout is hard to handle, partly ascribing to the agnostic input of fused segmentation.
 	2. The shape of the original clues is not completely removed. The same problem as VITON.
