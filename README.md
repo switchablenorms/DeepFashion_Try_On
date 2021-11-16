@@ -87,6 +87,8 @@ where t is a certain key point, Mp' is the set of key point we take into conside
 	3. Very difficult pose is hard to handle. Better solution could be proposed.
 
 ## Training Details
+Due to some version differences of the code, and some updates for better quality, some implementation details may be different from the paper. 
+
 For better inference performance, model G and G2 should be trained with 200 epoches, while model G1 and U net should be trained with 20 epoches.
 
 ## License
