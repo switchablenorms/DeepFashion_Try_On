@@ -1513,8 +1513,10 @@ class BoundedGridLocNet(nn.Module):
         coor=points.view(batch_size, -1, 2)
         row=self.get_row(coor,5)
         col=self.get_col(coor,5)
-        rg_loss = sum(self.grad_row(coor, 5))
-        cg_loss = sum(self.grad_col(coor, 5))
+        lenth=len(self.grad_row(coor, 5))
+        print('lenth',lenth)
+        rg_loss = sum(self.grad_row(coor, 5))/lenth
+        cg_loss = sum(self.grad_col(coor, 5))/lenth
         rg_loss = torch.max(rg_loss,torch.tensor(0.02).cuda())
         cg_loss = torch.max(cg_loss,torch.tensor(0.02).cuda())
         rx,ry,cx,cy=torch.tensor(0.08).cuda(),torch.tensor(0.08).cuda()\
@@ -1572,9 +1574,10 @@ class BoundedGridLocNet(nn.Module):
         sec_term = []
         for j in range(num):
             for i in range(1, num - 1):
-                x0, y0 = coor[:, j * num + i - 1, :][0]
-                x1, y1 = coor[:, j * num + i + 0, :][0]
-                x2, y2 = coor[:, j * num + i + 1, :][0]
+                x0, y0 = coor[:, j * num + i - 1, :]
+                x1, y1 = coor[:, j * num + i + 0, :]
+                x2, y2 = coor[:, j * num + i + 1, :]
+              #  print('slice',coor[:, j * num + i - 1, :].shape)
                 grad = torch.abs((y1 - y0) * (x1 - x2) - (y1 - y2) * (x1 - x0))
                 sec_term.append(grad)
         return sec_term
@@ -1583,9 +1586,9 @@ class BoundedGridLocNet(nn.Module):
         sec_term = []
         for i in range(num):
             for j in range(1, num - 1):
-                x0, y0 = coor[:, (j - 1) * num + i, :][0]
-                x1, y1 = coor[:, j * num + i, :][0]
-                x2, y2 = coor[:, (j + 1) * num + i, :][0]
+                x0, y0 = coor[:, (j - 1) * num + i, :]
+                x1, y1 = coor[:, j * num + i, :]
+                x2, y2 = coor[:, (j + 1) * num + i, :]
                 grad = torch.abs((y1 - y0) * (x1 - x2) - (y1 - y2) * (x1 - x0))
                 sec_term.append(grad)
         return sec_term
