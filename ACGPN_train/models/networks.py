@@ -1574,9 +1574,9 @@ class BoundedGridLocNet(nn.Module):
         sec_term = []
         for j in range(num):
             for i in range(1, num - 1):
-                x0, y0 = coor[:, j * num + i - 1, :]
-                x1, y1 = coor[:, j * num + i + 0, :]
-                x2, y2 = coor[:, j * num + i + 1, :]
+                x0, y0 = coor[:, j * num + i - 1, 0],coor[:, j * num + i - 1, 1]
+                x1, y1 = coor[:, j * num + i + 0, 0],coor[:, j * num + i + 0, 1]
+                x2, y2 = coor[:, j * num + i + 1, 0],coor[:, j * num + i + 1, 1]
               #  print('slice',coor[:, j * num + i - 1, :].shape)
                 grad = torch.abs((y1 - y0) * (x1 - x2) - (y1 - y2) * (x1 - x0))
                 sec_term.append(grad)
@@ -1586,9 +1586,9 @@ class BoundedGridLocNet(nn.Module):
         sec_term = []
         for i in range(num):
             for j in range(1, num - 1):
-                x0, y0 = coor[:, (j - 1) * num + i, :]
-                x1, y1 = coor[:, j * num + i, :]
-                x2, y2 = coor[:, (j + 1) * num + i, :]
+                x0, y0 = coor[:, (j - 1) * num + i, 0],coor[:, (j - 1) * num + i, 1]
+                x1, y1 = coor[:, j * num + i, 0],coor[:, j * num + i, 1]
+                x2, y2 = coor[:, (j + 1) * num + i, 0],coor[:, (j + 1) * num + i, 1]
                 grad = torch.abs((y1 - y0) * (x1 - x2) - (y1 - y2) * (x1 - x0))
                 sec_term.append(grad)
         return sec_term
