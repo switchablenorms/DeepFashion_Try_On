@@ -729,11 +729,11 @@ class Refine(nn.Module):
         pool3 = self.pool3(conv3)
 
         conv4 = self.conv4(pool3)
-        drop4 = self.drop4(conv4)
+        drop4 = conv4#self.drop4(conv4)
         pool4 = self.pool4(drop4)
 
         conv5 = self.conv5(pool4)
-        drop5 = self.drop5(conv5)
+        drop5 = conv5#self.drop5(conv5)
 
         up6 = self.up6(drop5)
         conv6 = self.conv6(torch.cat([drop4, up6], 1))
@@ -1586,6 +1586,7 @@ class BoundedGridLocNet(nn.Module):
         sec_term = []
         for i in range(num):
             for j in range(1, num - 1):
+                # print('coor[:, (j - 1) * num + i',coor[:, (j - 1) * num + i].shape)
                 x0, y0 = coor[:, (j - 1) * num + i, 0],coor[:, (j - 1) * num + i, 1]
                 x1, y1 = coor[:, j * num + i, 0],coor[:, j * num + i, 1]
                 x2, y2 = coor[:, (j + 1) * num + i, 0],coor[:, (j + 1) * num + i, 1]

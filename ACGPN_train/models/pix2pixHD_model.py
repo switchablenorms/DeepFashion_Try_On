@@ -281,6 +281,8 @@ class Pix2PixHDModel(BaseModel):
         # ipdb.set_trace()
         arm1_mask = torch.FloatTensor((label.cpu().numpy() == 11).astype(np.float)).cuda()
         arm2_mask = torch.FloatTensor((label.cpu().numpy() == 13).astype(np.float)).cuda()
+        face_mask = 0#torch.FloatTensor((label.cpu().numpy() == 12).astype(np.float)).cuda()
+
         pre_clothes_mask = torch.FloatTensor((pre_clothes_mask.detach().cpu().numpy() > 0.5).astype(np.float)).cuda()
         clothes = clothes * pre_clothes_mask
 
@@ -290,14 +292,15 @@ class Pix2PixHDModel(BaseModel):
         # fake_image,warped,warped_mask=self.Unet(clothes,clothes_mask,pre_clothes_mask)
         # real_image=real_image * clothes_mask+(1-clothes_mask)*-1
         shape = pre_clothes_mask.shape
-
+        fore_mask=torch.FloatTensor((label.cpu().numpy() >0).astype(np.float)).cuda()
+        back_mask=1-fore_mask
         G1_in = torch.cat([pre_clothes_mask, clothes, all_clothes_label, pose, self.gen_noise(shape)], dim=1)
         arm_label = self.G1.refine(G1_in)
         arm_label = self.sigmoid(arm_label)
         CE_loss = self.cross_entropy2d(arm_label, (label * (1 - clothes_mask)).transpose(0, 1)[0].long()) * 10
 
         armlabel_map = generate_discrete_label(arm_label.detach(), 14, False)
-        dis_label = generate_discrete_label(arm_label.detach(), 14)
+        dis_label = generate_discrete_label(input_label.detach(), 14)
 
         G2_in = torch.cat([pre_clothes_mask, clothes, masked_label, pose, self.gen_noise(shape)], 1)
         fake_cl = self.G2.refine(G2_in)
@@ -330,20 +333,25 @@ class Pix2PixHDModel(BaseModel):
         skin_color = self.ger_average_color((arm1_mask + arm2_mask - arm2_mask * arm1_mask),
                                             (arm1_mask + arm2_mask - arm2_mask * arm1_mask) * real_image)
 
-        img_hole_hand = img_fore * (1 - clothes_mask) * (1 - arm1_mask) * (1 - arm2_mask) + img_fore * arm1_mask * (
-                    1 - mask) + img_fore * arm2_mask * (1 - mask)
-
+        img_hole_hand = img_fore * (1 - clothes_mask) * (1 - arm1_mask) * (1 - arm2_mask)*(1-face_mask) + img_fore * arm1_mask * (
+                    1 - mask) + img_fore * arm2_mask* (1 - mask)+img_fore * face_mask* (1 - mask)
+        img_hole_mask=fore_mask * (1 - clothes_mask) * (1 - arm1_mask) * (1 - arm2_mask)*(1-face_mask)+ fore_mask * arm1_mask * (
+                    1 - mask) + fore_mask * arm2_mask * (1 - mask)+fore_mask * face_mask* (1 - mask)
         G_in = torch.cat([img_hole_hand, masked_label, real_image * clothes_mask, skin_color, self.gen_noise(shape)], 1)
         fake_image = self.G.refine(G_in.detach())
         fake_image = self.tanh(fake_image)
+        fake_image_replace=fake_image*(1-clothes_mask)+clothes_mask*real_image
+        fake_image_replace=fake_image_replace*(1-img_hole_mask)+real_image*img_hole_mask
+        fake_image_replace=fake_image_replace*(1-back_mask)+real_image*back_mask
+
         ## THE POOL TO SAVE IMAGES\
         ##
 
-        input_pool = [G1_in, G2_in, G_in, torch.cat([clothes_mask, clothes], 1)]  ##fake_cl_dis to replace
+        input_pool = [G1_in, G2_in,G_in, torch.cat([clothes_mask, clothes], 1),G_in]  ##fake_cl_dis to replace
         # ipdb.set_trace()
-        real_pool = [masked_label, clothes_mask, real_image, real_image * clothes_mask]
-        fake_pool = [arm_label, fake_cl, fake_image, fake_c]
-        D_pool = [self.D1, self.D2, self.D, self.D3]
+        real_pool = [masked_label, clothes_mask,real_image, real_image * clothes_mask]
+        fake_pool = [arm_label, fake_cl,fake_image, fake_c]
+        D_pool = [self.D1, self.D2,self.D, self.D3]
         pool_lenth = len(fake_pool)
         loss_D_fake = 0
         loss_D_real = 0
@@ -372,7 +380,7 @@ class Pix2PixHDModel(BaseModel):
                 for j in range(len(pred_fake[i]) - 1):
                     loss_G_GAN_Feat += D_weights * feat_weights * \
                                        self.criterionFeat(pred_fake[i][j],
-                                                          pred_real[i][j].detach()) * self.opt.lambda_feat
+                                                          pred_real[i][j].detach()) *5
 
         # ipdb.set_trace()
         comp_fake_c = fake_c.detach() * (1 - composition_mask).unsqueeze(1) + (
@@ -383,9 +391,10 @@ class Pix2PixHDModel(BaseModel):
         loss_G_VGG += self.criterionVGG.warp(warped, real_image * clothes_mask) + self.criterionVGG.warp(comp_fake_c,
                                                                                                          real_image * clothes_mask) * 10
         loss_G_VGG += self.criterionVGG.warp(fake_c, real_image * clothes_mask) * 20
-        loss_G_VGG += self.criterionVGG(fake_image, real_image)
+        loss_G_VGG += self.criterionVGG(fake_image, real_image)*5
+        # loss_G_VGG += self.criterionVGG(fake_image, real_image)*5
 
-        L1_loss = self.criterionFeat(fake_image, real_image)*20
+        L1_loss = self.criterionFeat(fake_image, real_image)*10
         #
         L1_loss += self.criterionFeat(warped_mask, clothes_mask) + self.criterionFeat(warped, real_image * clothes_mask)
         L1_loss += self.criterionFeat(fake_c, real_image * clothes_mask) * 0.2
@@ -398,9 +407,9 @@ class Pix2PixHDModel(BaseModel):
         # loss_G_GAN_Feat=L1_loss
         style_loss = L1_loss
         # Only return the fake_B image if necessary to save BW
-        return [self.loss_filter(loss_G_GAN, loss_G_GAN_Feat, loss_G_VGG, loss_D_real, loss_D_fake), fake_c,
-                comp_fake_c, dis_label
-            , L1_loss, style_loss, fake_cl, warped, clothes, CE_loss, rx * 0.1, ry * 0.1, cx * 0.1, cy * 0.1, rg * 0.1,
+        return [self.loss_filter(loss_G_GAN, loss_G_GAN_Feat, loss_G_VGG, loss_D_real, loss_D_fake), fake_image,
+                fake_image_replace, dis_label
+            , L1_loss, style_loss, fake_cl, real_image * clothes_mask, img_hole_hand*img_hole_mask, CE_loss, rx * 0.1, ry * 0.1, cx * 0.1, cy * 0.1, rg * 0.1,
                 cg * 0.1]
 
     def inference(self, label, label_ref, image_ref):
