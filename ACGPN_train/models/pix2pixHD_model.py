@@ -191,12 +191,12 @@ class Pix2PixHDModel(BaseModel):
             else:
                 params = list(self.Unet.parameters()) + list(self.G.parameters()) + list(self.G1.parameters()) + list(
                     self.G2.parameters())
-            self.optimizer_G = torch.optim.Adam(params, lr=0.0002, betas=(opt.beta1, 0.999))
+            self.optimizer_G = torch.optim.AdamW(params, lr=0.0002, betas=(opt.beta1, 0.999))
 
             # optimizer D
             params = list(self.D3.parameters()) + list(self.D.parameters()) + list(self.D2.parameters()) + list(
                 self.D1.parameters())
-            self.optimizer_D = torch.optim.Adam(params, lr=0.0002, betas=(opt.beta1, 0.999))
+            self.optimizer_D = torch.optim.AdamW(params, lr=0.0002, betas=(opt.beta1, 0.999))
 
             # load networks
             if not self.isTrain or opt.continue_train or opt.load_pretrain:
@@ -341,8 +341,6 @@ class Pix2PixHDModel(BaseModel):
         fake_image = self.G.refine(G_in.detach())
         fake_image = self.tanh(fake_image)
         fake_image_replace=fake_image*(1-clothes_mask)+clothes_mask*real_image
-        fake_image_replace=fake_image_replace*(1-img_hole_mask)+real_image*img_hole_mask
-        fake_image_replace=fake_image_replace*(1-back_mask)+real_image*back_mask
 
         ## THE POOL TO SAVE IMAGES\
         ##
@@ -350,7 +348,7 @@ class Pix2PixHDModel(BaseModel):
         input_pool = [G1_in, G2_in,G_in, torch.cat([clothes_mask, clothes], 1),G_in]  ##fake_cl_dis to replace
         # ipdb.set_trace()
         real_pool = [masked_label, clothes_mask,real_image, real_image * clothes_mask]
-        fake_pool = [arm_label, fake_cl,fake_image, fake_c]
+        fake_pool = [arm_label, fake_cl,fake_image_replace, fake_c]
         D_pool = [self.D1, self.D2,self.D, self.D3]
         pool_lenth = len(fake_pool)
         loss_D_fake = 0
@@ -391,7 +389,7 @@ class Pix2PixHDModel(BaseModel):
         loss_G_VGG += self.criterionVGG.warp(warped, real_image * clothes_mask) + self.criterionVGG.warp(comp_fake_c,
                                                                                                          real_image * clothes_mask) * 10
         loss_G_VGG += self.criterionVGG.warp(fake_c, real_image * clothes_mask) * 20
-        loss_G_VGG += self.criterionVGG(fake_image, real_image)*5
+        loss_G_VGG += self.criterionVGG(fake_image_replace, real_image)*5
         # loss_G_VGG += self.criterionVGG(fake_image, real_image)*5
 
         L1_loss = self.criterionFeat(fake_image, real_image)*10
