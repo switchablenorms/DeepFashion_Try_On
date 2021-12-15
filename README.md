@@ -1,6 +1,11 @@
 ## Towards Photo-Realistic Virtual Try-On by Adaptively Generating↔Preserving Image Content, CVPR'20.
 Rearranged code of CVPR 2020 paper 'Towards Photo-Realistic Virtual Try-On by Adaptively Generating↔Preserving Image Content' for open-sourcing.
-We rearrange the VITON dataset for easy access. **Notably, virtual try-on is a difficult research topic, and our solution is of course not perfect. Please refer to our failure cases and limitations before using this repo.**
+We rearrange the VITON dataset for easy access. 
+
+**Notably, virtual try-on is a difficult research topic, and our solution is of course not perfect. Please refer to our failure cases and limitations before using this repo.**
+
+The code is not fully tested. If you meet any bugs or want to improve the system, please feel free to raise in the Issue and we can disscuss.
+
 
 [[Sample Try-on Video]](https://www.youtube.com/watch?v=BbKBSfDBcxI) [[Checkpoints]](https://drive.google.com/file/d/1UWT6esQIU_d4tUm8cjxDKMhB8joQbrFx/view?usp=sharing) 
 
