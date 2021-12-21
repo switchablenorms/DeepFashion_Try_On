@@ -282,6 +282,12 @@ class Pix2PixHDModel(BaseModel):
         return out
     def forward(self, label, pre_clothes_mask, img_fore, clothes_mask, clothes, all_clothes_label, real_image, pose,grid,mask_fore):
         # Encode Inputs
+
+        self.G1.eval()
+        self.G.eval()
+        self.Unet.eval()
+        self.G2.eval()
+
         input_label, masked_label, all_clothes_label = self.encode_input(label, clothes_mask, all_clothes_label)
         arm1_mask = torch.FloatTensor((label.cpu().numpy() == 11).astype(np.float)).cuda()
         arm2_mask = torch.FloatTensor((label.cpu().numpy() == 13).astype(np.float)).cuda()
@@ -405,4 +411,3 @@ class InferenceModel(Pix2PixHDModel):
     def forward(self, inp):
         label = inp
         return self.inference(label)
-
