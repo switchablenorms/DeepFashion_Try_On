@@ -189,14 +189,21 @@ class Pix2PixHDModel(BaseModel):
                             '------------- Only training the local enhancer ork (for %d epochs) ------------' % opt.niter_fix_global)
                 print('The layers that are finetuned are ', sorted(finetune_list))
             else:
-                params = list(self.Unet.parameters()) + list(self.G.parameters()) + list(self.G1.parameters()) + list(
-                    self.G2.parameters())
+                params = list(self.G.parameters())
             self.optimizer_G = torch.optim.AdamW(params, lr=0.0002, betas=(opt.beta1, 0.999))
 
+            params = list(self.Unet.parameters()) + list(self.G1.parameters()) + list(
+                self.G2.parameters())
+            self.optimizer_G_remain = torch.optim.Adam(params, lr=0.0002, betas=(opt.beta1, 0.999))
+
             # optimizer D
-            params = list(self.D3.parameters()) + list(self.D.parameters()) + list(self.D2.parameters()) + list(
-                self.D1.parameters())
+            params = list(self.D.parameters())
             self.optimizer_D = torch.optim.AdamW(params, lr=0.0002, betas=(opt.beta1, 0.999))
+
+            # optimizer D
+            params = list(self.D3.parameters()) + list(self.D2.parameters()) + list(
+                self.D1.parameters())
+            self.optimizer_D_remain = torch.optim.Adam(params, lr=0.0002, betas=(opt.beta1, 0.999))
 
             # load networks
             if not self.isTrain or opt.continue_train or opt.load_pretrain:
