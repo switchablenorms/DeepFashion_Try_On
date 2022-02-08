@@ -166,12 +166,15 @@ for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
         ############### Backward Pass ####################
         # update generator weights
         model.module.optimizer_G.zero_grad()
+        model.module.optimizer_G_remain.zero_grad()
         loss_G.backward()
         model.module.optimizer_G.step()
-        #
-        # # update discriminator weights
+        model.module.optimizer_G_remain.step()
+
+        model.module.optimizer_D_remain.zero_grad()
         model.module.optimizer_D.zero_grad()
         loss_D.backward()
+        model.module.optimizer_D_remain.step()
         model.module.optimizer_D.step()
 
         ############## Display results and errors ##########
