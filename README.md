@@ -8,14 +8,14 @@ The code is not fully tested. If you meet any bugs or want to improve the system
 For email request, please send to hanyang@ethz.ch
 
 
-[Sample Try-on Video](https://www.youtube.com/watch?v=BbKBSfDBcxI) [[Checkpoints]](https://drive.google.com/file/d/1UWT6esQIU_d4tUm8cjxDKMhB8joQbrFx/view?usp=sharing) 
+[[Sample Try-on Video]](https://www.youtube.com/watch?v=BbKBSfDBcxI) [[Checkpoints]](https://drive.google.com/file/d/1UWT6esQIU_d4tUm8cjxDKMhB8joQbrFx/view?usp=sharing) 
 
-[Dataset_Test](https://drive.google.com/file/d/1tE7hcVFm8Td8kRh5iYRBSDFdvZIkbUIR/view?usp=sharing) [Dataset_Train](https://drive.google.com/file/d/1lHNujZIq6KVeGOOdwnOXVCSR5E7Kv6xv/view?usp=sharing)
+[[Dataset_Test]](https://drive.google.com/file/d/1tE7hcVFm8Td8kRh5iYRBSDFdvZIkbUIR/view?usp=sharing) [Dataset_Train](https://drive.google.com/file/d/1lHNujZIq6KVeGOOdwnOXVCSR5E7Kv6xv/view?usp=sharing)
 
 
-[Paper](https://arxiv.org/abs/2003.05863)
+[[Paper]](https://arxiv.org/abs/2003.05863)
 
-**CP-VTON+ (CVPRW 2020)**, **ACGPN (CVPR2020)**, **DCTON (CVPR2021)** and **RT-VTON (CVPR 2022)** are given in the results from left to right. [Datalink](https://drive.google.com/file/d/1tl-hvPUcTXbBN_3TKyWViv9y_TN25LpZ/view?usp=sharing), [Test Pair List](https://drive.google.com/file/d/1e4YxOahv1X6jxjaxtn_GmZpKwQ6eBMwN/view). 
+**CP-VTON+ (CVPRW 2020)**, **ACGPN (CVPR2020)**, **DCTON (CVPR2021)** and **RT-VTON (CVPR 2022)** are given in the results from left to right. [[Datalink]](https://drive.google.com/file/d/1tl-hvPUcTXbBN_3TKyWViv9y_TN25LpZ/view?usp=sharing), [[Test Pair List]](https://drive.google.com/file/d/1e4YxOahv1X6jxjaxtn_GmZpKwQ6eBMwN/view). 
 
 ## Update
 - [2022-7-5] We collect the try-on results of several methods given a widely used test pair list in VITON dataset. Researchers can utilize it for fast baseline comparison.
