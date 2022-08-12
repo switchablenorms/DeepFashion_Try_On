@@ -109,7 +109,7 @@ For better inference performance, model G and G2 should be trained with 200 epoc
 The use of this software is RESTRICTED to **non-commercial research and educational purposes**.
 
 ## Citation
-If you use our code or models in your research, please cite with:
+If you use our code or models or the offered baseline results in your research, please cite with:
 ```
 @InProceedings{Yang_2020_CVPR,
 author = {Yang, Han and Zhang, Ruimao and Guo, Xiaobao and Liu, Wei and Zuo, Wangmeng and Luo, Ping},
@@ -118,6 +118,15 @@ booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVP
 month = {June},
 year = {2020}
 }
+
+@inproceedings{yang2022full,
+title = {Full-Range Virtual Try-On With Recurrent Tri-Level Transform},
+author = {Yang, Han and Yu, Xinrui and Liu, Ziwei},
+booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+pages = {3460--3469}
+year = {2022}
+}
+
 ```
 
 ## Dataset
