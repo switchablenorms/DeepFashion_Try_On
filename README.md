@@ -119,6 +119,14 @@ month = {June},
 year = {2020}
 }
 
+@inproceedings{ge2021disentangled,
+  title={Disentangled Cycle Consistency for Highly-realistic Virtual Try-On},
+  author={Ge, Chongjian and Song, Yibing and Ge, Yuying and Yang, Han and Liu, Wei and Luo, Ping},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={16928--16937},
+  year={2021}
+}
+
 @inproceedings{yang2022full,
 title = {Full-Range Virtual Try-On With Recurrent Tri-Level Transform},
 author = {Yang, Han and Yu, Xinrui and Liu, Ziwei},
