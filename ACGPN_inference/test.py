@@ -8,7 +8,8 @@ import os
 import numpy as np
 import torch
 from torch.autograd import Variable
-from tensorboardX import SummaryWriter
+#from tensorboardX import SummaryWriter -- this import is not working anymore
+from torch.utils.tensorboard import SummaryWriter # updated import
 import cv2
 writer = SummaryWriter('runs/G1G2')
 SIZE=320
